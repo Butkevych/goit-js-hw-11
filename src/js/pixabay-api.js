@@ -20,7 +20,7 @@ const defaultOptions = {
 export async function fetchImages(
   query,
   page = 1,
-  perPage = 12,
+  perPage = 200,
   options = defaultOptions
 ) {
   const url = `${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(
