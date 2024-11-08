@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <script type="module" src="./main.js"></script>
+    <form id="form">
+      <input type="text" name="query" placeholder="Search images..." />
+      <button type="submit">Search</button>
+    </form>
+    <div class="gallery"></div>
+    <span class="loader" style="display: none" id="loader"></span>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
