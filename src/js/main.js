@@ -33,7 +33,19 @@ form.addEventListener('submit', async event => {
 
   try {
     const images = await fetchImages(query);
-    renderImages(images);
+    if (images.length === 0) {
+      const galleryElement = document.querySelector('.gallery');
+      galleryElement.innerHTML = '';
+      iziToast.error({
+        title: 'Sorry,',
+        message:
+          'there are no images matching your search query. Please, try again!',
+        position: 'topRight',
+        timeout: 3000,
+      });
+    } else {
+      renderImages(images);
+    }
   } catch (error) {
     renderError(error);
   }
