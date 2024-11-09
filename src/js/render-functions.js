@@ -3,23 +3,19 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 export function renderImages(images) {
   const galleryElement = document.querySelector('.gallery');
   galleryElement.innerHTML = '';
-  function showLoader() {
-    const loader = document.getElementById('loader');
-    loader.style.display = 'block';
-  }
-  function hideLoader() {
-    const loader = document.getElementById('loader');
-    loader.style.display = 'none';
-  }
-  showLoader();
-  setTimeout(() => {
-    images.forEach(image => {
-      const imgElement = document.createElement('div');
-      imgElement.classList.add('image-card');
-      imgElement.innerHTML = `
+
+  const imagesSet = images
+    .map(image => {
+      return `
+    <div class="image-card">
       <a href="${image.largeImageURL}">
         <img src="${image.webformatURL}" alt="${image.tags}" />
       </a>
@@ -29,17 +25,13 @@ export function renderImages(images) {
       <div class="coms"><p>Comments</p> ${image.comments}</div>
       <div class="coms"><p>Downloads</p> ${image.downloads}</div>
       </div>
+      </div>
     `;
-      galleryElement.appendChild(imgElement);
-    });
+    })
+    .join('');
+  galleryElement.innerHTML = imagesSet;
 
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionDelay: 250,
-    });
-    lightbox.refresh();
-    hideLoader();
-  }, 2000);
+  lightbox.refresh();
 }
 
 export function renderError(error) {
