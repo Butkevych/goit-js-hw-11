@@ -1,6 +1,3 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
 function showLoader() {
   const loader = document.getElementById('loader');
   loader.style.display = 'block';
